@@ -18,8 +18,9 @@ jobs:
           npm run build
         env:
           CI: false
-
-      - name: Run deploy script
-        run: |
-          git config user.name felix1234567890 && git config user.email blueskyandsea01@gmail.com
-          npm run gh-pages-deploy
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@releases/v3
+        with:
+          ACCESS_TOKEN: ${{ secrets.DEPLOY_KEY }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build # The folder the action should deploy.
