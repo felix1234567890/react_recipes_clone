@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import "./App.css";
-import { recipes } from "./templList";
 import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
 
 class App extends Component {
   state = {
-    recipes: recipes,
+    recipes: [],
     url:
       "https://www.food2fork.com/api/search?key=cf349d087c773f3d4992d99460a8b848",
     baseUrl:
@@ -15,7 +14,7 @@ class App extends Component {
     pageIndex: 1,
     search: "",
     query: "&q=",
-    error: ""
+    error: "",
   };
   async getRecipes() {
     try {
@@ -33,7 +32,7 @@ class App extends Component {
   componentDidMount() {
     this.getRecipes();
   }
-  displayPage = index => {
+  displayPage = (index) => {
     switch (index) {
       default:
       case 1:
@@ -56,21 +55,21 @@ class App extends Component {
         );
     }
   };
-  handleIndex = index => {
+  handleIndex = (index) => {
     this.setState({ pageIndex: index });
   };
   handleDetails = (index, id) => {
     this.setState({
       pageIndex: index,
-      details_id: id
+      details_id: id,
     });
   };
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({
-      search: e.target.value
+      search: e.target.value,
     });
   };
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { baseUrl, query, search } = this.state;
     this.setState(
