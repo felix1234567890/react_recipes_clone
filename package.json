@@ -1,5 +1,6 @@
 {
   "name": "react-recipies",
+  "homepage": "https://felix1234567890.github.io/react_recipes_clone",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
