@@ -18,7 +18,7 @@ class App extends Component {
   };
   async getRecipes() {
     try {
-      const data = await fetch(this.state.url);
+      const data = await fetch(this.state.url, { mode: "no-cors" });
       const json = await data.json();
       if (json.recipes.length === 0) {
         this.setState({ error: "No recipes to show" });
