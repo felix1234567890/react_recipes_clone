@@ -1,24 +1,23 @@
 import React, { Component } from "react";
 import "./App.css";
-import RecipeList from "./components/RecipeList";
 import RecipeDetails from "./components/RecipeDetails";
+import RecipeList from "./components/RecipeList";
 
 class App extends Component {
   state = {
     recipes: [],
-    url:
-      "https://www.food2fork.com/api/search?key=cf349d087c773f3d4992d99460a8b848",
+    url:   "https://forkify-api.herokuapp.com/api/search",
     baseUrl:
-      "https://www.food2fork.com/api/search?key=cf349d087c773f3d4992d99460a8b848",
+      "https://forkify-api.herokuapp.com/api/search",
     details_id: 35384,
     pageIndex: 1,
     search: "",
-    query: "&q=",
+    query: "?q=",
     error: "",
   };
   async getRecipes() {
     try {
-      const data = await fetch(this.state.url, { mode: "no-cors" });
+      const data = await fetch(this.state.url+this.state.query+this.state.search);
       const json = await data.json();
       if (json.recipes.length === 0) {
         this.setState({ error: "No recipes to show" });
@@ -28,9 +27,6 @@ class App extends Component {
     } catch (error) {
       console.log(error);
     }
-  }
-  componentDidMount() {
-    this.getRecipes();
   }
   displayPage = (index) => {
     switch (index) {

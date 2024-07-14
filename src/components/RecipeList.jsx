@@ -9,7 +9,6 @@ export default class RecipeList extends Component {
       handleDetails,
       value,
       handleChange,
-      handleSubmit,
       error
     } = this.props;
     return (
@@ -18,7 +17,6 @@ export default class RecipeList extends Component {
           <RecipeSearch
             value={value}
             handleChange={handleChange}
-            handleSubmit={handleSubmit}
           />
           <div className="container my-5">
             <div className="row">

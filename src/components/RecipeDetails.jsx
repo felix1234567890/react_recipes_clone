@@ -1,19 +1,18 @@
-import React, { Component } from "react";
-
+import React, { Component, use } from "react";
+export const fetchRecipes = async (id) => {
+  const url = `https://forkify-api.herokuapp.com/api/search/?q=${id}`;
+  const data = await fetch(url);
+  return data.json();
+};
 export default class RecipeDetails extends Component {
   state = {
     recipe: {},
   };
+
   async componentDidMount() {
     const id = this.props.id;
-    const url = `https://www.food2fork.com/api/get?key=cf349d087c773f3d4992d99460a8b848&rId=${id}`;
-    try {
-      const data = await fetch(url, { mode: "no-cors" });
-      const json = await data.json();
-      this.setState({ recipe: json.recipe });
-    } catch (error) {
-      console.log(error);
-    }
+    const { recipe } = use(this.fetchRecipes(id));
+    this.setState({ recipe });
   }
   render() {
     const {
@@ -47,6 +46,7 @@ export default class RecipeDetails extends Component {
               <a
                 href={publisher_url}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-primary"
               >
                 Publisher web
@@ -54,11 +54,12 @@ export default class RecipeDetails extends Component {
               <a
                 href={source_url}
                 target="_blank"
+                rel="noopener noreferrer"
                 className="btn btn-success mx-2"
               >
                 Recipe URL
               </a>
-              <ul className="list-gorup mt-4">
+              <ul className="list-group mt-4">
                 <h2 className="mt-3 mb-4">Ingredients</h2>
                 {ingredients.map((item, i) => {
                   return (
